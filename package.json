@@ -1,7 +1,7 @@
 {
-  "name": "opms-frontend",
+  "name": "CNPM",
   "version": "0.0.1",
-  "description": "opmsFrontend",
+  "description": "CNPM",
   "main": "index.html",
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.dev.js",
@@ -14,14 +14,20 @@
     "build:dev": "webpack --config=webpack.dev.js",
     "build:prod": "webpack --config=webpack.prod.js"
   },
-  "author": "@opms",
+  "author": "@CNPM",
   "private": true,
   "dependencies": {
     "@hookform/resolvers": "^0.1.1",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/styles": "^4.10.0",
+    "firebase": "^8.0.2",
+    "notistack": "^1.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-hook-form": "^6.8.6",
+    "react-hook-form": "^6.11.2",
+    "react-query": "^2.26.2",
     "react-router-dom": "^5.2.0",
     "yup": "^0.29.3"
   },

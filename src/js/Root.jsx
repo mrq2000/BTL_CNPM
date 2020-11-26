@@ -3,19 +3,58 @@ import '../scss/app.scss';
 
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { CssBaseline } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { SnackbarProvider } from 'notistack';
+import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 
 import PrivateRoute from './PrivateRoute';
 
-import Home from './pages/Home';
+import theme from './theme';
+import UserRequestInfo from './pages/UserRequestInfo';
+import UserRequestList from './pages/UserRequestList';
+import UserSendRequest from './pages/UserSendRequest';
+import UserNotification from './pages/UserNotification';
+import UserInfo from './pages/UserInfo';
+import UserChangePassword from './pages/UserChangePassword';
+
+import AdminNotification from './pages/AdminNotification';
+import AdminRequestList from './pages/AdminRequestList';
+
 import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import './firebase';
+
+const queryCache = new QueryCache();
 
 const Root = () => (
   <BrowserRouter>
     <div>
-      <Switch>
-        <Route path="/sign-in" component={SignIn} />
-        <PrivateRoute exact path="/" component={Home} />
-      </Switch>
+      <ThemeProvider theme={theme}>
+        <SnackbarProvider maxSnack={3}>
+          <ReactQueryCacheProvider queryCache={queryCache}>
+            <CssBaseline />
+
+            <Switch>
+              <Route path="/sign-in" component={SignIn} />
+              <Route path="/sign-up" component={SignUp} />
+              <PrivateRoute exact path="/admin/notification" component={AdminNotification} />
+              <PrivateRoute exact path="/admin/request-list" component={AdminRequestList} />
+              <PrivateRoute exact path="/admin/request-analysis" component={UserSendRequest} />
+              <PrivateRoute exact path="/admin/request-info/:requestId" component={UserRequestInfo} />
+              <PrivateRoute exact path="/admin/change-password" component={UserChangePassword} />
+              <PrivateRoute exact path="/admin/info" component={UserInfo} />
+
+              <PrivateRoute exact path="/user/notification" component={UserNotification} />
+              <PrivateRoute exact path="/user/new-request" component={UserSendRequest} />
+              <PrivateRoute exact path="/user/info" component={UserInfo} />
+              <PrivateRoute exact path="/user/change-password" component={UserChangePassword} />
+              <PrivateRoute exact path="/user/request-list" component={UserRequestList} />
+              <PrivateRoute exact path="/user/request-info/:requestId" component={UserRequestInfo} />
+            </Switch>
+          </ReactQueryCacheProvider>
+        </SnackbarProvider>
+      </ThemeProvider>
     </div>
   </BrowserRouter>
 );
