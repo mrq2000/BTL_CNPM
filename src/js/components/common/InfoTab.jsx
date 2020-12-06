@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import firebase from 'firebase';
+import { useQueryCache } from 'react-query';
 
 const useStyles = makeStyles((theme) => ({
   tab: {
@@ -33,8 +34,10 @@ const useStyles = makeStyles((theme) => ({
 const InfoTab = ({ currentValue }) => {
   const classes = useStyles();
   const history = useHistory();
+  const cache = useQueryCache();
 
   const handleSignOut = () => firebase.auth().signOut().then(() => {
+    cache.clear();
     history.push('/sign-in');
   });
 

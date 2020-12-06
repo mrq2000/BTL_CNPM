@@ -16,7 +16,8 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonGruop: {
     borderRadius: 10,
-    backgroundColor: '#e5e5e5',
+    backgroundColor: '#fff',
+    border: '2px solid #f67f30',
 
     width: 400,
     paddingTop: theme.spacing(2),
