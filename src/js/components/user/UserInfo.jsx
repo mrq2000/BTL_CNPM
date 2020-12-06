@@ -1,10 +1,9 @@
 import React from 'react';
 import {
-  Box, Typography,
+  Box, Typography, LinearProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import LinearProgress from '@material-ui/core/LinearProgress';
 import useUserInfo from '../../data/useUserInfo';
 
 const useStyles = makeStyles((theme) => ({
