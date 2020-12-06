@@ -96,7 +96,7 @@ export default function SignIn() {
             inputRef={register}
             fullWidth
             name="password"
-            label="Password"
+            label="Mật Khẩu"
             type="password"
             error={!!errors.password}
             helperText={errors.password ? errors.password.message : ''}
