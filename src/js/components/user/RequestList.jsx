@@ -26,15 +26,14 @@ const RequestList = () => {
     if (data) {
       return (
         <TableBody>
-          {data ? data.map((request, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <TableRow key={index}>
-              <TableCell size="small" align="left">{request.title}</TableCell>
-              <TableCell size="small" align="left">{request.content}</TableCell>
-              <TableCell size="small" align="left">{request.datetime}</TableCell>
-              <TableCell size="small" align="left">{requestStatus.getTitleStatus(request.state)}</TableCell>
+          {Object.keys(data).map((id) => (
+            <TableRow key={id}>
+              <TableCell size="small" align="left">{data[id].title}</TableCell>
+              <TableCell size="small" align="left">{data[id].content}</TableCell>
+              <TableCell size="small" align="left">{data[id].datetime}</TableCell>
+              <TableCell size="small" align="left">{requestStatus.getTitleStatus(data[id].state)}</TableCell>
             </TableRow>
-          )) : null}
+          ))}
         </TableBody>
       );
     }

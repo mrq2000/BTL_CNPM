@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import { TextField, Container, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useForm } from 'react-hook-form';
+import firebase from 'firebase';
+import { useHistory } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
+
 import ConfirmDialog from '../common/ConfirmDialog';
+import requestStatus from '../../enums/requestStatus';
+import { timeNow } from '../../helpers/dayjs';
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -43,13 +49,31 @@ const UserRequestIfi = () => {
     content,
   } = watch();
 
+  const history = useHistory();
+  const { enqueueSnackbar } = useSnackbar();
+  const [loading, setLoading] = useState(false);
+
+  const userId = firebase.auth().currentUser.uid;
   const [confirmOpen, setConfirmOpen] = useState(false);
   const handleClose = () => {
     setConfirmOpen(false);
   };
 
   const handleSend = () => {
-    console.log(title, content);
+    setLoading(true);
+
+    firebase.database().ref(`request/${userId}`).push({
+      title,
+      content,
+      state: requestStatus.NEW,
+      datetime: timeNow,
+    }).then(() => {
+      history.push('/user/request-list');
+    })
+      .catch(() => {
+        enqueueSnackbar('Có Lỗi Xảy Ra, Vui Lòng Kiểm Tra Lại', { variant: 'error' });
+        setLoading(true);
+      });
   };
 
   return (
@@ -90,6 +114,7 @@ const UserRequestIfi = () => {
         variant="contained"
         className={classes.button}
         onClick={handleSubmit(() => setConfirmOpen(true))}
+        disabled={loading}
       >
         Gửi
       </Button>

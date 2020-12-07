@@ -6,8 +6,6 @@ const useGetRequest = () => useQuery('requests', async () => {
 
   const data = await (await firebase.database().ref(`/request/${userId}`).once('value')).val();
   return data;
-}, {
-  staleTime: Infinity,
 });
 
 export default useGetRequest;
