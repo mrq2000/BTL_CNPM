@@ -4,7 +4,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import useUserInfo from '../../data/useUserInfo';
+import useManageInfo from '../../data/useManageInfo';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -13,9 +13,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const UserInfo = () => {
+const AdminInfo = () => {
   const classes = useStyles();
-  const { isLoading, data: userInfo, error } = useUserInfo();
+  const { isLoading, data: adminInfo, error } = useManageInfo();
 
   if (isLoading) return <LinearProgress />;
   if (error) return <>Error</>;
@@ -27,7 +27,7 @@ const UserInfo = () => {
           Tên:
         </Typography>
         <Typography>
-          {userInfo.name}
+          {adminInfo.name}
         </Typography>
       </Box>
 
@@ -36,7 +36,7 @@ const UserInfo = () => {
           Giới Tính:
         </Typography>
         <Typography>
-          {userInfo.gender}
+          {adminInfo.gender}
         </Typography>
       </Box>
 
@@ -45,7 +45,7 @@ const UserInfo = () => {
           Địa chỉ:
         </Typography>
         <Typography>
-          {userInfo.address}
+          {adminInfo.address}
         </Typography>
       </Box>
 
@@ -54,7 +54,7 @@ const UserInfo = () => {
           Ngày sinh:
         </Typography>
         <Typography>
-          {userInfo.birthday}
+          {adminInfo.birthday}
         </Typography>
       </Box>
 
@@ -63,7 +63,7 @@ const UserInfo = () => {
           Số điện thoại:
         </Typography>
         <Typography>
-          {userInfo.phone}
+          {adminInfo.phone}
         </Typography>
       </Box>
 
@@ -72,7 +72,7 @@ const UserInfo = () => {
           Email:
         </Typography>
         <Typography>
-          {userInfo.email}
+          {adminInfo.email}
         </Typography>
       </Box>
 
@@ -81,11 +81,11 @@ const UserInfo = () => {
           User Name:
         </Typography>
         <Typography>
-          {userInfo.username}
+          {adminInfo.username}
         </Typography>
       </Box>
     </Box>
   );
 };
 
-export default UserInfo;
+export default AdminInfo;
