@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 const UserInfo = () => {
   const classes = useStyles();
   const { isLoading, data: userInfo, error } = useUserInfo();
-
+  console.log(data);
   if (isLoading) return <LinearProgress />;
   if (error) return <>Error</>;
 
