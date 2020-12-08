@@ -17,6 +17,7 @@ import UserSendRequest from './pages/UserSendRequest';
 import UserNotification from './pages/UserNotification';
 import UserInfo from './pages/UserInfo';
 import UserChangePassword from './pages/UserChangePassword';
+import UserManageInfo from './pages/UserManageInfo';
 
 import AdminNotification from './pages/AdminNotification';
 import AdminRequestList from './pages/AdminRequestList';
@@ -51,6 +52,7 @@ const Root = () => (
               <PrivateRoute exact path="/user/change-password" component={UserChangePassword} />
               <PrivateRoute exact path="/user/request-list" component={UserRequestList} />
               <PrivateRoute exact path="/user/request-info/:requestId" component={UserRequestInfo} />
+              <PrivateRoute exact path="/user/manage-info" component={UserManageInfo} />
             </Switch>
           </ReactQueryCacheProvider>
         </SnackbarProvider>
