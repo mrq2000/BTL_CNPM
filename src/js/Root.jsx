@@ -22,6 +22,7 @@ import UserManageInfo from './pages/UserManageInfo';
 import AdminNotification from './pages/AdminNotification';
 import AdminInfo from './pages/AdminInfo';
 import AdminRequestList from './pages/AdminRequestList';
+import AdminStatistic from './pages/AdminStatistic';
 
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -38,11 +39,13 @@ const Root = () => (
             <CssBaseline />
 
             <Switch>
+              <Route exact path="/" component={SignIn} />
               <Route path="/sign-in" component={SignIn} />
               <Route path="/sign-up" component={SignUp} />
+
               <PrivateRoute exact path="/admin/notification" component={AdminNotification} />
               <PrivateRoute exact path="/admin/request-list" component={AdminRequestList} />
-              <PrivateRoute exact path="/admin/request-analysis" component={UserSendRequest} />
+              <PrivateRoute exact path="/admin/request-analysis" component={AdminStatistic} />
               <PrivateRoute exact path="/admin/request-info/:requestId" component={UserRequestInfo} />
               <PrivateRoute exact path="/admin/change-password" component={UserChangePassword} />
               <PrivateRoute exact path="/admin/info" component={AdminInfo} />
