@@ -64,9 +64,10 @@ const AdminTab = ({ currentValue }) => {
         className={classes.tab}
       />
       <Tab
-        value="manage-info"
+        value="third-party"
         label="Thông tin các cơ quan - tổ chức"
         component={Link}
+        to="/admin/third-party"
         className={classes.tab}
       />
     </Tabs>
