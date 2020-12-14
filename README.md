@@ -1,10 +1,12 @@
-### Start
-```
-npm install
-```
+Bài tập lớn Nhập môn Công nghệ phần mềm
 
-### Start webserver for development
-```
+Đề  tài: Quản lý kiến nghị phản ánh
+
+Hướng dẫn cài đặt
+### Tải các dependences cần thiết
+npm install
+
+### Chạy chương trình
 npm run start
-npm run server
-```
+
+Mở browser truy cập vào http://localhost:8080/
