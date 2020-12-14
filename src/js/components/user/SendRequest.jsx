@@ -53,7 +53,8 @@ const UserRequestIfi = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
 
-  const userId = firebase.auth().currentUser.uid;
+  const userEmail = firebase.auth().currentUser.email;
+
   const [confirmOpen, setConfirmOpen] = useState(false);
   const handleClose = () => {
     setConfirmOpen(false);
@@ -62,7 +63,8 @@ const UserRequestIfi = () => {
   const handleSend = () => {
     setLoading(true);
 
-    firebase.database().ref(`request/${userId}`).push({
+    firebase.database().ref('request').push({
+      user: userEmail,
       title,
       content,
       state: requestStatus.NEW,

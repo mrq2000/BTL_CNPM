@@ -8,11 +8,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import useGetRequest from '../../data/useGetRequest';
 import requestStatus from '../../enums/requestStatus';
+import { formatDateTime } from '../../helpers/dayjs';
 
 const useStyles = makeStyles((theme) => ({
   title: {
     fontWeight: 'bold',
     minWidth: theme.spacing(3),
+  },
+  tableContainer: {
+    marginBottom: theme.spacing(3),
   },
 }));
 
@@ -24,23 +28,27 @@ const FeedBack = ({ data }) => {
       <Dialog onClose={() => setOpen(false)} open={open} fullWidth maxWidth="md">
         <DialogTitle>Trả lời từ Tổ Trưởng</DialogTitle>
         <DialogContent>
-          <TableRow>
-            <TableCell className={classes.title}>
-              Nội dung:
-            </TableCell>
-            <TableCell>
-              {data.content}
-            </TableCell>
-          </TableRow>
+          <TableContainer component={Paper} className={classes.tableContainer}>
+            <Table size="medium">
+              <TableRow>
+                <TableCell className={classes.title}>
+                  Nội dung:
+                </TableCell>
+                <TableCell>
+                  {data.content}
+                </TableCell>
+              </TableRow>
 
-          <TableRow>
-            <TableCell className={classes.title}>
-              Ngày trả lời:
-            </TableCell>
-            <TableCell>
-              {data.datetime}
-            </TableCell>
-          </TableRow>
+              <TableRow>
+                <TableCell className={classes.title}>
+                  Ngày trả lời:
+                </TableCell>
+                <TableCell>
+                  {formatDateTime(data.datetime)}
+                </TableCell>
+              </TableRow>
+            </Table>
+          </TableContainer>
         </DialogContent>
       </Dialog>
 
@@ -71,12 +79,12 @@ const RequestList = () => {
     if (data) {
       return (
         <TableBody>
-          {Object.keys(data).map((id) => (
+          {Object.keys(data).reverse().map((id) => (
             <TableRow key={id}>
-              <TableCell size="small" align="left">{data[id].title}</TableCell>
-              <TableCell size="small" align="left">{data[id].content}</TableCell>
-              <TableCell size="small" align="left">{data[id].datetime}</TableCell>
-              <TableCell size="small" align="left">{requestStatus.getTitleStatus(data[id].state)}</TableCell>
+              <TableCell size="=medium" align="left">{data[id].title}</TableCell>
+              <TableCell size="=medium" align="left">{data[id].content}</TableCell>
+              <TableCell size="=medium" align="left">{formatDateTime(data.datetime)}</TableCell>
+              <TableCell size="=medium" align="left">{requestStatus.getTitleStatus(data[id].state)}</TableCell>
               <TableCell size="medium" align="left">
                 {
                   data[id].state === requestStatus.DONE
