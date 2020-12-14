@@ -11,81 +11,91 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     marginRight: theme.spacing(2),
   },
+  img: {
+    marginRight: theme.spacing(3),
+    height: theme.spacing(50),
+    width: theme.spacing(40),
+    objectFit: 'cover',
+  },
 }));
 
-const AdminInfo = () => {
+const UserInfo = () => {
   const classes = useStyles();
-  const { isLoading, data: adminInfo, error } = useManageInfo();
+  const { isLoading, data: userInfo, error } = useManageInfo();
 
   if (isLoading) return <LinearProgress />;
   if (error) return <>Error</>;
 
   return (
-    <Box display="flex" flexDirection="column" mt={3}>
-      <Box display="flex">
-        <Typography className={classes.title}>
-          Tên:
-        </Typography>
-        <Typography>
-          {adminInfo.name}
-        </Typography>
-      </Box>
+    <Box display="flex" flexDirection="row" mt={3}>
+      <img alt="logo" src={userInfo.img} className={classes.img} />
 
-      <Box display="flex">
-        <Typography className={classes.title}>
-          Giới Tính:
-        </Typography>
-        <Typography>
-          {adminInfo.gender}
-        </Typography>
-      </Box>
+      <Box display="flex" flexDirection="column">
+        <Box display="flex">
+          <Typography className={classes.title}>
+            Tên:
+          </Typography>
+          <Typography>
+            {userInfo.name}
+          </Typography>
+        </Box>
 
-      <Box display="flex">
-        <Typography className={classes.title}>
-          Địa chỉ:
-        </Typography>
-        <Typography>
-          {adminInfo.address}
-        </Typography>
-      </Box>
+        <Box display="flex">
+          <Typography className={classes.title}>
+            Giới Tính:
+          </Typography>
+          <Typography>
+            {userInfo.gender}
+          </Typography>
+        </Box>
 
-      <Box display="flex">
-        <Typography className={classes.title}>
-          Ngày sinh:
-        </Typography>
-        <Typography>
-          {adminInfo.birthday}
-        </Typography>
-      </Box>
+        <Box display="flex">
+          <Typography className={classes.title}>
+            Địa chỉ:
+          </Typography>
+          <Typography>
+            {userInfo.address}
+          </Typography>
+        </Box>
 
-      <Box display="flex">
-        <Typography className={classes.title}>
-          Số điện thoại:
-        </Typography>
-        <Typography>
-          {adminInfo.phone}
-        </Typography>
-      </Box>
+        <Box display="flex">
+          <Typography className={classes.title}>
+            Ngày sinh:
+          </Typography>
+          <Typography>
+            {userInfo.birthday}
+          </Typography>
+        </Box>
 
-      <Box display="flex">
-        <Typography className={classes.title}>
-          Email:
-        </Typography>
-        <Typography>
-          {adminInfo.email}
-        </Typography>
-      </Box>
+        <Box display="flex">
+          <Typography className={classes.title}>
+            Số điện thoại:
+          </Typography>
+          <Typography>
+            {userInfo.phone}
+          </Typography>
+        </Box>
 
-      <Box display="flex">
-        <Typography className={classes.title}>
-          User Name:
-        </Typography>
-        <Typography>
-          {adminInfo.username}
-        </Typography>
+        <Box display="flex">
+          <Typography className={classes.title}>
+            Email:
+          </Typography>
+          <Typography>
+            {userInfo.email}
+          </Typography>
+        </Box>
+
+        <Box display="flex">
+          <Typography className={classes.title}>
+            User Name:
+          </Typography>
+          <Typography>
+            {userInfo.username}
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );
 };
 
-export default AdminInfo;
+export default UserInfo;
