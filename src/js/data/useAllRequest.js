@@ -1,17 +1,14 @@
 import firebase from 'firebase';
 import { useQuery } from 'react-query';
 
-const useGetRequest = () => useQuery('requests', async () => {
-  const userEmail = firebase.auth().currentUser.email;
-
+const useAllRequest = (limit) => useQuery('all requests', async () => {
   const data = await (await firebase
     .database()
     .ref('/request')
-    .orderByChild('user')
-    .equalTo(userEmail)
+    .limitToLast(limit)
     .once('value'))
     .val();
   return data;
 });
 
-export default useGetRequest;
+export default useAllRequest;
