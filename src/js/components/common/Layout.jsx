@@ -7,6 +7,11 @@ import Header from './Header';
 import UserInfo from './UserInfo';
 import ManageTab from './ManageTab';
 import InfoTab from './InfoTab';
+import AdminTab from './AdminTab';
+import AdminInfo from './AdminInfo';
+import AdminInfoTab from './AdminInfoTab';
+
+import useManageInfo from '../../data/useManageInfo';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -37,16 +42,31 @@ const useStyles = makeStyles((theme) => ({
 
 const Layout = ({ children, tab, title }) => {
   const classes = useStyles();
+  const { data, isLoading, error } = useManageInfo();
+
+  if (isLoading && error) return <></>;
   return (
     <>
       <Header />
       <div className={classes.root}>
-        <Box display="flex" flexDirection="column">
-          <UserInfo />
-          <ManageTab currentValue={tab} />
-          <div className={classes.marginTop} />
-          <InfoTab currentValue={tab} />
-        </Box>
+        {
+          data ? (
+            <Box display="flex" flexDirection="column">
+              <AdminInfo />
+              <AdminTab currentValue={tab} />
+              <div className={classes.marginTop} />
+              <AdminInfoTab currentValue={tab} />
+            </Box>
+          ) : (
+
+            <Box display="flex" flexDirection="column">
+              <UserInfo />
+              <ManageTab currentValue={tab} />
+              <div className={classes.marginTop} />
+              <InfoTab currentValue={tab} />
+            </Box>
+          )
+        }
 
         <div className={classes.mainContent}>
           <Box display="flex" justifyContent="center" flexDirection="column" alignItems="center">

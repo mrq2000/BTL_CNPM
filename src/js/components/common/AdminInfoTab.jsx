@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const InfoTab = ({ currentValue }) => {
+const AdminInfoTab = ({ currentValue }) => {
   const classes = useStyles();
   const history = useHistory();
   const cache = useQueryCache();
@@ -55,14 +55,7 @@ const InfoTab = ({ currentValue }) => {
       <Tab
         value="account-info"
         label="Thông tin cá nhân"
-        to="/user/info"
-        component={Link}
-        className={classes.tab}
-      />
-      <Tab
-        value="change-password"
-        label="Đổi mật khẩu"
-        to="/user/change-password"
+        to="/admin/info"
         component={Link}
         className={classes.tab}
       />
@@ -77,8 +70,8 @@ const InfoTab = ({ currentValue }) => {
   );
 };
 
-InfoTab.propTypes = {
+AdminInfoTab.propTypes = {
   currentValue: PropTypes.string.isRequired,
 };
 
-export default InfoTab;
+export default AdminInfoTab;

@@ -17,8 +17,10 @@ import UserSendRequest from './pages/UserSendRequest';
 import UserNotification from './pages/UserNotification';
 import UserInfo from './pages/UserInfo';
 import UserChangePassword from './pages/UserChangePassword';
+import UserManageInfo from './pages/UserManageInfo';
 
 import AdminNotification from './pages/AdminNotification';
+import AdminInfo from './pages/AdminInfo';
 import AdminRequestList from './pages/AdminRequestList';
 
 import SignIn from './pages/SignIn';
@@ -43,7 +45,7 @@ const Root = () => (
               <PrivateRoute exact path="/admin/request-analysis" component={UserSendRequest} />
               <PrivateRoute exact path="/admin/request-info/:requestId" component={UserRequestInfo} />
               <PrivateRoute exact path="/admin/change-password" component={UserChangePassword} />
-              <PrivateRoute exact path="/admin/info" component={UserInfo} />
+              <PrivateRoute exact path="/admin/info" component={AdminInfo} />
 
               <PrivateRoute exact path="/user/notification" component={UserNotification} />
               <PrivateRoute exact path="/user/new-request" component={UserSendRequest} />
@@ -51,6 +53,7 @@ const Root = () => (
               <PrivateRoute exact path="/user/change-password" component={UserChangePassword} />
               <PrivateRoute exact path="/user/request-list" component={UserRequestList} />
               <PrivateRoute exact path="/user/request-info/:requestId" component={UserRequestInfo} />
+              <PrivateRoute exact path="/user/manage-info" component={UserManageInfo} />
             </Switch>
           </ReactQueryCacheProvider>
         </SnackbarProvider>

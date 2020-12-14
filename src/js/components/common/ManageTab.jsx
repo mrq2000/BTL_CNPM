@@ -67,6 +67,7 @@ const ManageTab = ({ currentValue }) => {
         value="manage-info"
         label="Xem thông tin người quản lý"
         component={Link}
+        to="/user/manage-info"
         className={classes.tab}
       />
     </Tabs>
