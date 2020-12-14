@@ -23,6 +23,7 @@ import AdminNotification from './pages/AdminNotification';
 import AdminInfo from './pages/AdminInfo';
 import AdminRequestList from './pages/AdminRequestList';
 import AdminStatistic from './pages/AdminStatistic';
+import ThirdPartyInfo from './pages/ThirdPartyInfo';
 
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -49,6 +50,7 @@ const Root = () => (
               <PrivateRoute exact path="/admin/request-info/:requestId" component={UserRequestInfo} />
               <PrivateRoute exact path="/admin/change-password" component={UserChangePassword} />
               <PrivateRoute exact path="/admin/info" component={AdminInfo} />
+              <PrivateRoute exact path="/admin/third-party" component={ThirdPartyInfo} />
 
               <PrivateRoute exact path="/user/notification" component={UserNotification} />
               <PrivateRoute exact path="/user/new-request" component={UserSendRequest} />

@@ -23,10 +23,7 @@ const AdminRequestList = () => {
       title="Danh sách kiến nghị - phản ánh"
     >
       <Box>
-        <Box display="flex" justifyContent="space-around">
-          <Button className={classes.button}>
-            Gửi phản hồi cho người dân
-          </Button>
+        <Box display="flex" justifyContent="flex-end">
           <Button className={classes.button}>
             Gửi ý kiến đến cơ quan tổ chức
           </Button>
