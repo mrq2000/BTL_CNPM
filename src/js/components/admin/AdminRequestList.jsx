@@ -13,6 +13,7 @@ import PopoverText from '../common/PopoverText';
 import useAllRequest from '../../data/useAllRequest';
 import requestStatus from '../../enums/requestStatus';
 import { timeNow, formatDateTime } from '../../helpers/dayjs';
+import ImageDialog from '../common/ImageDialog';
 
 const FeedBack = ({ id, title }) => {
   const { enqueueSnackbar } = useSnackbar();
@@ -95,6 +96,7 @@ const AdminRequestList = () => {
         <TableCell size="medium" align="left">Thời gian gửi</TableCell>
         <TableCell size="medium" align="left">Người gửi</TableCell>
         <TableCell size="medium" align="left">Tình trạng</TableCell>
+        <TableCell size="medium" align="center">Hình ảnh</TableCell>
         <TableCell size="medium" align="left" />
       </TableRow>
     </TableHead>
@@ -116,6 +118,11 @@ const AdminRequestList = () => {
               <TableCell size="medium" align="left">{data[id].user}</TableCell>
               <TableCell size="medium" align="left">
                 {requestStatus.getTitleStatus(data[id].state)}
+              </TableCell>
+              <TableCell size="medium" align="center">
+                {
+                  data[id].imgId ? <ImageDialog id={data[id].imgId} /> : null
+                }
               </TableCell>
               <TableCell size="medium" align="left">
                 {
