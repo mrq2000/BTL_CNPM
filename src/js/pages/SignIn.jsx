@@ -3,6 +3,7 @@ import {
   Grid, Box, Button, Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 
 import SignInComponent from '../components/auth/SignIn';
 import AdminSignIn from '../components/auth/AdminSignIn';
@@ -24,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(2),
   },
   button: {
+    '&:hover': {
+      color: '#fff',
+      backgroundColor: '#f67f30',
+    },
     color: '#fff',
     backgroundColor: '#f67f30',
 
@@ -31,6 +36,13 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(2),
     marginRight: theme.spacing(8),
     marginLeft: theme.spacing(8),
+  },
+  notActive: {
+    backgroundColor: '#b8a89d',
+    '&:hover': {
+      color: '#fff',
+      backgroundColor: '#b8a89d',
+    },
   },
 }));
 
@@ -57,10 +69,18 @@ const SignIn = () => {
           <Typography align="center" variant="h5" color="primary">
             Đăng nhập
           </Typography>
-          <Button variant="contained" className={classes.button} onClick={() => setRole('user')}>
+          <Button
+            variant="contained"
+            className={clsx(classes.button, role !== 'user' && classes.notActive)}
+            onClick={() => setRole('user')}
+          >
             Dành cho người dân
           </Button>
-          <Button variant="contained" className={classes.button} onClick={() => setRole('admin')}>
+          <Button
+            variant="contained"
+            className={clsx(classes.button, role !== 'admin' && classes.notActive)}
+            onClick={() => setRole('admin')}
+          >
             Dành cho tổ trưởng
           </Button>
         </Box>
