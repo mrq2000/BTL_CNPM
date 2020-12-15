@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { TextField, Container, Button } from '@material-ui/core';
+import {
+  TextField, Container, Button, Box,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useForm } from 'react-hook-form';
 import firebase from 'firebase';
@@ -16,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
 
     display: 'flex',
     alignItems: 'center',
@@ -30,6 +33,15 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
     border: ' 1px solid #fbd2b8',
     backgroundColor: '#fdf4f4',
+  },
+  img: {
+    height: theme.spacing(20),
+    width: theme.spacing(20),
+
+    objectFit: 'cover',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    marginLeft: theme.spacing(2),
   },
 }));
 
@@ -52,6 +64,16 @@ const UserRequestIfi = () => {
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
+  const [file, setFile] = React.useState(null);
+
+  const fileHandler = (e) => {
+    if (e.target.files[0].type.startsWith('image')) {
+      setFile(e.target.files[0]);
+    } else {
+      setFile(null);
+      enqueueSnackbar('Vui lòng chọn file với định dạng hình ảnh', { variant: 'error' });
+    }
+  };
 
   const userEmail = firebase.auth().currentUser.email;
 
@@ -62,16 +84,27 @@ const UserRequestIfi = () => {
 
   const handleSend = () => {
     setLoading(true);
-
-    firebase.database().ref('request').push({
-      user: userEmail,
-      title,
-      content,
-      state: requestStatus.NEW,
-      datetime: timeNow,
-    }).then(() => {
-      history.push('/user/request-list');
-    })
+    const imgName = timeNow;
+    firebase.storage()
+      .ref()
+      .child(`/image/${imgName}.png`)
+      .put(file)
+      .then(() => {
+        firebase.database().ref('request').push({
+          user: userEmail,
+          imgId: `${imgName}.png`,
+          title,
+          content,
+          state: requestStatus.NEW,
+          datetime: timeNow,
+        }).then(() => {
+          history.push('/user/request-list');
+        })
+          .catch(() => {
+            enqueueSnackbar('Có Lỗi Xảy Ra, Vui Lòng Kiểm Tra Lại', { variant: 'error' });
+            setLoading(true);
+          });
+      })
       .catch(() => {
         enqueueSnackbar('Có Lỗi Xảy Ra, Vui Lòng Kiểm Tra Lại', { variant: 'error' });
         setLoading(true);
@@ -111,6 +144,29 @@ const UserRequestIfi = () => {
         error={!!errors.content}
         helperText={errors.content && 'Nội dung không được để trống'}
       />
+
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        width="100%"
+      >
+        <TextField
+          fullWidth
+          label="Upload Img"
+          variant="outlined"
+          type="file"
+          onChange={fileHandler}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <img
+          className={classes.img}
+          src={file ? URL.createObjectURL(file) : null}
+          alt={file ? file.name : null}
+        />
+      </Box>
 
       <Button
         variant="contained"

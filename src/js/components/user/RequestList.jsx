@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import useGetRequest from '../../data/useGetRequest';
 import requestStatus from '../../enums/requestStatus';
 import { formatDateTime } from '../../helpers/dayjs';
+import ImageDialog from '../common/ImageDialog';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -59,7 +60,6 @@ const FeedBack = ({ data }) => {
 
 const RequestList = () => {
   const { isLoading, data, error } = useGetRequest();
-
   if (isLoading) return <LinearProgress style={{ width: '100%' }} />;
   if (error) return <>Error</>;
 
@@ -70,6 +70,7 @@ const RequestList = () => {
         <TableCell size="medium" align="left">Nội dung</TableCell>
         <TableCell size="medium" align="left">Ngày đăng</TableCell>
         <TableCell size="medium" align="left">Trạng thái</TableCell>
+        <TableCell size="medium" align="center">Hình ảnh</TableCell>
         <TableCell size="medium" align="left" />
       </TableRow>
     </TableHead>
@@ -83,8 +84,13 @@ const RequestList = () => {
             <TableRow key={id}>
               <TableCell size="=medium" align="left">{data[id].title}</TableCell>
               <TableCell size="=medium" align="left">{data[id].content}</TableCell>
-              <TableCell size="=medium" align="left">{formatDateTime(data.datetime)}</TableCell>
+              <TableCell size="=medium" align="left">{formatDateTime(data[id].datetime)}</TableCell>
               <TableCell size="=medium" align="left">{requestStatus.getTitleStatus(data[id].state)}</TableCell>
+              <TableCell size="=medium" align="center">
+                {
+                  data[id].imgId ? <ImageDialog id={data[id].imgId} /> : null
+                }
+              </TableCell>
               <TableCell size="medium" align="left">
                 {
                   data[id].state === requestStatus.DONE
